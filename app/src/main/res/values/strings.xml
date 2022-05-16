@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Spending</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="add_item">Add Item</string>
+    <string name="what_to_buy">What to buy?</string>
+    <string-array name="Category">
+        <item>Groceries</item>
+        <item>Furniture</item>
+        <item>IT</item>
+        <item>Daily Necessities</item>
+        <item>Others</item>
+
+    </string-array>
+</resources>
