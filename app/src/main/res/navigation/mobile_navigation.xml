@@ -3,13 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/shoppingList">
+    app:startDestination="@id/navigation_shoppingList">
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.spending.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_shoppingList"
+        android:name="com.example.spending.Shoppinglist.ShoppingList"
+        android:label="Home"
+        tools:layout="@layout/shopping_list_fragment" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,15 +28,11 @@
         android:name="com.example.spending.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
-    <fragment
-        android:id="@+id/shoppingList"
-        android:name="com.example.spending.Shoppinglist.ShoppingList"
-        android:label="Home"
-        tools:layout="@layout/shopping_list_fragment" />
 
     <fragment
         android:id="@+id/navigation_expenditure"
         android:name="com.example.spending.ui.expenditure.ExpenditureFragment"
         android:label="Expenditure"
         tools:layout="@layout/expenditure_fragment" />
+
 </navigation>
