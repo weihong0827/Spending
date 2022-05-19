@@ -27,4 +27,10 @@
         android:name="com.example.spending.Shoppinglist.ShoppingList"
         android:label="Home"
         tools:layout="@layout/shopping_list_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_expenditure"
+        android:name="com.example.spending.ui.expenditure.ExpenditureFragment"
+        android:label="Expenditure"
+        tools:layout="@layout/expenditure_fragment" />
 </navigation>

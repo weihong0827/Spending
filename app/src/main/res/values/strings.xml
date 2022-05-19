@@ -4,6 +4,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_expenditure">Expenditure</string>
     <string name="add_item">Add Item</string>
     <string name="what_to_buy">What to buy?</string>
     <string-array name="Category">
