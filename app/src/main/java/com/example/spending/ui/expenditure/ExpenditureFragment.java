@@ -46,8 +46,8 @@ public class ExpenditureFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         EditText editTextBudget = (EditText) view.findViewById(R.id.budget_value);
-        System.out.println("I want to see editTextBudget");
-        System.out.println(!editTextBudget.getText().toString().equals(""));
+        String existing_budget_value = expViewModel.getBudget2();
+        editTextBudget.setText(existing_budget_value);
         editTextBudget.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -56,15 +56,15 @@ public class ExpenditureFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!editTextBudget.getText().toString().equals("")) {
-                    System.out.println("entered");
-                    String budget_value = editTextBudget.getText().toString();
-                    TextView remaining = (TextView) view.findViewById(R.id.remaining_value);
-                    int v = Integer.parseInt(budget_value);
-                    int total_amount = 50;
-                    int remaining_value = v - total_amount;
-                    remaining.setText(String.valueOf(remaining_value));
-                }
+//                if (!editTextBudget.getText().toString().equals("")) {
+//                    System.out.println("entered");
+//                    String budget_value = editTextBudget.getText().toString();
+//                    TextView remaining = (TextView) view.findViewById(R.id.remaining_value);
+//                    int v = Integer.parseInt(budget_value);
+//                    int total_amount = 50;
+//                    int remaining_value = v - total_amount;
+//                    remaining.setText(String.valueOf(remaining_value));
+//                }
             }
 
             @Override
@@ -74,7 +74,6 @@ public class ExpenditureFragment extends Fragment {
                 Log.d(TAG, "addedBudget afterTextChanged");
             }
         });
-        System.out.println("good");
 //        v = budget_value - hisViewModel.getItem(total_amount)
 //        TextView.setText(v);
     }
