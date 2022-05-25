@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,33 +7,138 @@
     android:fillViewport="true"
     tools:context=".Shoppinglist.ShoppingList">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <!-- Category headers -->
+        <!-- Groceries -->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints">
+            android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/storefront"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:background="@color/blue1"
-
+                android:padding="5.7dp"
                 android:src="@drawable/ic_baseline_storefront_24" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/groceries"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/storefront"
                 android:background="@color/blue1"
                 android:padding="8dp"
                 android:text="@string/groceries"
                 android:textColor="@color/black" />
 
-        </LinearLayout>
+        </RelativeLayout>
+        <!-- Furniture -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </ScrollView>
+            <ImageView
+                android:id="@+id/lighting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@color/blue1"
+                android:padding="5.7dp"
+                android:src="@drawable/ic_outline_light_24" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/furniture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/lighting"
+                android:background="@color/blue1"
+                android:padding="8dp"
+                android:text="@string/furniture"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+        <!-- IT -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/laptop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@color/blue1"
+                android:padding="5.7dp"
+                android:src="@drawable/ic_baseline_phonelink_24" />
+
+            <TextView
+                android:id="@+id/IT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/laptop"
+                android:background="@color/blue1"
+                android:padding="8dp"
+                android:text="@string/IT"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+        <!-- Daily Necessities -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/house"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@color/blue1"
+                android:padding="5.7dp"
+                android:src="@drawable/ic_outline_house_24" />
+
+            <TextView
+                android:id="@+id/daily"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/house"
+                android:background="@color/blue1"
+                android:padding="8dp"
+                android:text="@string/daily"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+        <!-- Others -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@color/blue1"
+                android:padding="5.7dp"
+                android:src="@drawable/ic_baseline_more_horiz_24" />
+
+            <TextView
+                android:id="@+id/others"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/dots"
+                android:background="@color/blue1"
+                android:padding="8dp"
+                android:text="@string/Others"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>
