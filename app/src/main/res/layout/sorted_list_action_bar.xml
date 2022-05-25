@@ -2,41 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
     android:padding="10dp"
-    android:weightSum="1"
     android:background="@color/green">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.6"
-        >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <!-- To display the name of page - Shopping List -->
+        <!-- Page Title -->
         <TextView
             android:id="@+id/sorted_list_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:text="@string/title_shopping_list"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"/>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.4"
-        android:gravity="end"
-        >
-
-        <!-- Display "add" icon button, to navigate to "choose category"-->
+        <!-- "add" icon button. To navigate to "choose category"-->
         <ImageView
             android:id="@+id/add_item_button"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_baseline_control_point_24"/>
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_control_point_24"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
 
-    </LinearLayout>
 </LinearLayout>

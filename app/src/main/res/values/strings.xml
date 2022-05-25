@@ -17,4 +17,11 @@
         <item>Others</item>
     </string-array>
 
+    <!-- category names -->
+    <string name="groceries">Groceries</string>
+    <string name="furniture">Furniture</string>
+    <string name="IT">IT</string>
+    <string name="daily">Daily necessities</string>
+    <string name="Others">Others</string>
+
 </resources>
