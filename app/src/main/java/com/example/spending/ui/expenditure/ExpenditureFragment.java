@@ -46,7 +46,7 @@ public class ExpenditureFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         EditText editTextBudget = (EditText) view.findViewById(R.id.budget_value);
-        String existing_budget_value = expViewModel.getBudget2();
+        String existing_budget_value = "200"; // supposed to replace with expViewModel.getBudget2();
         editTextBudget.setText(existing_budget_value);
         editTextBudget.addTextChangedListener(new TextWatcher() {
             @Override
@@ -72,6 +72,8 @@ public class ExpenditureFragment extends Fragment {
                 String budget_value = editTextBudget.getText().toString();
                 expViewModel.addBudget(budget_value);
                 Log.d(TAG, "addedBudget afterTextChanged");
+                TextView textView = (TextView) view.findViewById(R.id.remaining_value);
+                expViewModel.display_remaining(textView);
             }
         });
 //        v = budget_value - hisViewModel.getItem(total_amount)
