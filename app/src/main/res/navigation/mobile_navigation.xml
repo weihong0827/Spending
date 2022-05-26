@@ -27,4 +27,9 @@
         android:name="com.example.spending.Shoppinglist.ShoppingList"
         android:label="Home"
         tools:layout="@layout/shopping_list_fragment" />
+    <fragment
+        android:id="@+id/uploadReciept"
+        android:name="com.example.spending.uploadReciept"
+        android:label="upload_reciept_fragment"
+        tools:layout="@layout/upload_reciept_fragment" />
 </navigation>

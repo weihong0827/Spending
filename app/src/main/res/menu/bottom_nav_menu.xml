@@ -10,6 +10,10 @@
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_dashboard" />
+    <item
+        android:id="@+id/uploadReciept"
+        android:icon="@drawable/ic_baseline_file_upload_24"
+        android:title="@string/upload" />
 
     <item
         android:id="@+id/navigation_notifications"
