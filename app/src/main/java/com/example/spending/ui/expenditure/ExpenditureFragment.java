@@ -19,7 +19,10 @@ import android.widget.TextView;
 
 import com.example.spending.R;
 import com.example.spending.Shoppinglist.ShoppingListViewModel;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Text;
 
@@ -46,7 +49,12 @@ public class ExpenditureFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         EditText editTextBudget = (EditText) view.findViewById(R.id.budget_value);
-        String existing_budget_value = "200"; // supposed to replace with expViewModel.getBudget2();
+        String existing_budget_value = expViewModel.getBudget(1, new ExpenditureCallback() {
+            @Override
+            public void act(Task<DocumentReference> task) {
+                task.getResult().getDa.toString();
+            }
+        }); // supposed to replace with expViewModel.getBudget2();
         editTextBudget.setText(existing_budget_value);
         editTextBudget.addTextChangedListener(new TextWatcher() {
             @Override
@@ -73,6 +81,7 @@ public class ExpenditureFragment extends Fragment {
                 expViewModel.addBudget(budget_value);
                 Log.d(TAG, "addedBudget afterTextChanged");
                 TextView textView = (TextView) view.findViewById(R.id.remaining_value);
+                textView. setText(budget-jeut)
                 expViewModel.display_remaining(textView);
             }
         });
