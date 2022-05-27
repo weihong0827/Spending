@@ -21,6 +21,7 @@ import com.example.spending.R;
 import com.example.spending.Shoppinglist.ShoppingListViewModel;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -49,13 +50,13 @@ public class ExpenditureFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         EditText editTextBudget = (EditText) view.findViewById(R.id.budget_value);
-        String existing_budget_value = expViewModel.getBudget("1", new ExpenditureCallback() {
+
+        expViewModel.getBudget("1", new ExpenditureCallback() {
             @Override
-            public void act(Task<DocumentReference> task) {
-                System.out.println(task);
+            public void act(Task<QuerySnapshot> task) {
+                editTextBudget.setText(task.getResult().getDocuments().get(0).get("budget").toString());
             }
         }); // supposed to replace with expViewModel.getBudget2();
-        editTextBudget.setText(existing_budget_value);
         editTextBudget.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -78,11 +79,18 @@ public class ExpenditureFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 String budget_value = editTextBudget.getText().toString();
-                expViewModel.addBudget(budget_value);
+                expViewModel.addBudget("1",budget_value);
                 Log.d(TAG, "addedBudget afterTextChanged");
                 TextView textView = (TextView) view.findViewById(R.id.remaining_value);
                 textView. setText(50-20);
-                expViewModel.display_remaining(textView);
+                expViewModel.display_remaining("1",
+                     new ExpenditureCallback() {
+                         @Override
+                         public void act(Task<QuerySnapshot> task) {
+                             int expense = Integer.parseInt(task.getResult().getDocuments().get(0).get("expense").toString());
+                         }
+                     }
+                );
             }
         });
 //        v = budget_value - hisViewModel.getItem(total_amount)

@@ -14,7 +14,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.HashMap;
 
 public class ExpenditureViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+
     private static final String TAG = "ExpenditureViewModel";
 
     //constructor
@@ -76,16 +76,28 @@ public class ExpenditureViewModel extends ViewModel {
                 callback.act(task);
             }
         });
+
     }
 
 //    public void updateBudget(String budget_value) {
 //        db.collection("budget").document("budget_fixeddocumentid").update("budget", budget_value);
 //    }
 
-    public float display_remaining(int budget) {
-        budget = 200; // supposed to replace with expViewModel.get();
-        int expenses = 50; // supposed to replace with expViewModel.get();
-        return calculation(budget, expenses);
+    public void display_remaining(String user_id, final ExpenditureCallback callback) {
+        db.collection("expense").whereEqualTo("user_id", user_id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                System.out.println(task);
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Log.d(TAG, document.getId() + " => " + document.getData());
+
+                }
+                //need a callback here
+
+
+                callback.act(task);
+            }
+        });
+
     }
 
     public float calculation(int budget, int expenses) {
