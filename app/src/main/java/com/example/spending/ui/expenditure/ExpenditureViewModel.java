@@ -68,6 +68,7 @@ public class ExpenditureViewModel extends ViewModel {
 
         db.collection("budget").whereEqualTo("user_id", user_id).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                System.out.println(task);
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Log.d(TAG, document.getId() + " => " + document.getData());
 

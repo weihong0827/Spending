@@ -49,10 +49,10 @@ public class ExpenditureFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         EditText editTextBudget = (EditText) view.findViewById(R.id.budget_value);
-        String existing_budget_value = expViewModel.getBudget(1, new ExpenditureCallback() {
+        String existing_budget_value = expViewModel.getBudget("1", new ExpenditureCallback() {
             @Override
             public void act(Task<DocumentReference> task) {
-                task.getResult().getDa.toString();
+                System.out.println(task);
             }
         }); // supposed to replace with expViewModel.getBudget2();
         editTextBudget.setText(existing_budget_value);
@@ -81,7 +81,7 @@ public class ExpenditureFragment extends Fragment {
                 expViewModel.addBudget(budget_value);
                 Log.d(TAG, "addedBudget afterTextChanged");
                 TextView textView = (TextView) view.findViewById(R.id.remaining_value);
-                textView. setText(budget-jeut)
+                textView. setText(50-20);
                 expViewModel.display_remaining(textView);
             }
         });
