@@ -2,6 +2,8 @@ package com.example.spending.ui.expenditure;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,6 +28,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
 import org.w3c.dom.Text;
 
 public class ExpenditureFragment extends Fragment {
