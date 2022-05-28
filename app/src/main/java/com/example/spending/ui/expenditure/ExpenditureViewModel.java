@@ -27,49 +27,27 @@ public class ExpenditureViewModel extends ViewModel {
 //    @RequiresApi(api = Build.VERSION_CODES.O)
     public void addBudget(String user_id, float budget_value) {
         HashMap<String, Object> budgetMap = new HashMap<>();
-        budgetMap.put("budget", budget_value);
+        budgetMap.put("budget_value", budget_value);
         budgetMap.put("user_id", user_id);
+        // ##################################################################################### why can't firebase update? Is it cause my firebase not working?
+        db.collection("budget").document("testUpdate").update(budgetMap);
+        Log.d(TAG, "addBudget: tested doc().update");
+        db.collection("budget").document("testSet").set(budgetMap);
+        Log.d(TAG, "addBudget: tested doc().set");
+        db.collection("budget").add(budgetMap);
+        Log.d(TAG, "addBudget: tested col().add");
+        // ##################################################################################### what determines successful?
         if (!db.collection("budget").whereEqualTo("user_id", user_id).get().isSuccessful()) {
-            db.collection("budget").document().update(budgetMap);
+            db.collection("budget").add(budgetMap);
+            Log.d(TAG, "Added " + budget_value + " to firebase for user_id: " + user_id + " with Idk what document ID");
         } else {
+            // test going into the else loop ###################################################################################################
+            // how to updateDoc? ###################################################################################################
             db.collection("budget").document("budget_fixeddocumentid").set(budgetMap);
-            Log.d(TAG, "Added " + budget_value + " to firebase");
+            db.collection("budget").whereEqualTo("user_id", user_id);
+            Log.d(TAG, "addBudget: updated document to " + budget_value + " for user_id: " + user_id);
         }
-//                .set(task -> {
-//            if (task.isSuccessful()) {
-//                Log.d(TAG, "logcat Added " + budget_value + " to firebase with ID: " + task.getResult().getId());
-//                System.out.println("system Added " + budget_value + " to firebase with ID: " + task.getResult().getId());
-//            })
     }
-
-//    public int getBudget() {
-//        int value = db.collection("budget").document("budget_fixeddocumentid").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//                    if (document.exists()) {
-//                        System.out.println("DocumentSnapshot data: " + document.getData());
-//                    } else {
-//                        System.out.println("No such document");
-//                    }
-//                } else {
-//                    System.out.println("get failed with " + task.getException());
-//                }
-//            }
-//           });
-//
-//        return value;
-//    }
-
-//    public String getBudget2() {
-//        System.out.println("Entered");
-//        Task<DocumentSnapshot> object = db.collection("budget").document("budget_fixeddocumentid").get();
-//        System.out.println(object);
-//        Object value = object.getResult().getData();
-//        System.out.println(value);
-//        return String.valueOf(value);
-//    }
 
     public void getBudget(String user_id, final ExpenditureCallback callback) {
         //firebase firestore get record

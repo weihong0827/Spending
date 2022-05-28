@@ -73,28 +73,24 @@ public class ExpenditureFragment extends Fragment {
         expViewModel.setData(new ExpenditureViewModel());
 
         expViewModel.getBudget("1", new ExpenditureCallback() {
-                @Override
+            @Override
                 public void act(Task<QuerySnapshot> task) {
-                    Log.d(TAG, "2nd callback");
                     if (!String.valueOf(task.getResult().getDocuments().get(0).get("budget")).isEmpty()) {
                         editTextBudget.setText(String.valueOf(task.getResult().getDocuments().get(0).get("budget")));
                     }
-                    Log.d(TAG, "end of 2nd callback");
 
                     expViewModel.display_remaining("1", new ExpenditureCallback() {
-                                @Override
-                                public void act(Task<QuerySnapshot> task) {
-                                    Log.d(TAG, "first callback");
-                                    if (!editTextBudget.getText().toString().isEmpty()) {
-                                        float budget_value = Float.parseFloat(String.valueOf(editTextBudget.getText()));
-                                        float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
-                                        remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
-                                    }
-                                    Log.d(TAG, "end of first callback");
+                        @Override
+                            public void act(Task<QuerySnapshot> task) {
+                                if (!editTextBudget.getText().toString().isEmpty()) {
+                                    float budget_value = Float.parseFloat(String.valueOf(editTextBudget.getText()));
+                                    float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
+                                    remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
                                 }
+                                Log.d(TAG, "Expenditure page finished loading");
                             }
+                        }
                     );
-
                 }
             }
         );
@@ -104,21 +100,14 @@ public class ExpenditureFragment extends Fragment {
             public void onClick(View v) {
                 float budget_value = Float.parseFloat(editTextBudget.getText().toString());
                 expViewModel.addBudget("1", budget_value);
-//                I don't need to use a callback to editTextBudget.setText() right? I can just make use of the same var budget_value?
-//                expViewModel.getBudget("1", new ExpenditureCallback() {
-//                    @Override
-//                    public void act(Task<QuerySnapshot> task) {
-//                        editTextBudget.setText(task.getResult().getDocuments().get(0).get("budget").toString());
-//                    }
-//                });
                 editTextBudget.setText(String.valueOf(budget_value));
                 expViewModel.display_remaining("1", new ExpenditureCallback() {
-                            @Override
-                            public void act(Task<QuerySnapshot> task) {
-                                float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
-                                remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
-                            }
+                    @Override
+                        public void act(Task<QuerySnapshot> task) {
+                            float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
+                            remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
                         }
+                    }
                 );
             }
         });
