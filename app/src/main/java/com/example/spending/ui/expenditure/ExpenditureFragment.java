@@ -54,27 +54,26 @@ public class ExpenditureFragment extends Fragment {
         Button submit_budget_value = (Button) view.findViewById(R.id.submit_budget_value);
         TextView remaining_value = (TextView) view.findViewById(R.id.remaining_value);
 
-        Log.d(TAG, "Before .getBudget");
         expViewModel.getBudget("1", new ExpenditureCallback() {
             @Override
             public void act(Task<QuerySnapshot> task) {
-                Log.d(TAG, "Inside.getBudget");
-                editTextBudget.setText(task.getResult().getDocuments().get(0).get("budget").toString());
+                if (!editTextBudget.getText().toString().isEmpty()) {
+                    editTextBudget.setText(task.getResult().getDocuments().get(0).get("budget").toString());
+                }
             }
         });
-        Log.d(TAG, "After .getBudget");
 
-        Log.d(TAG, "expViewModel.display_remaining failing?");
         expViewModel.display_remaining("1", new ExpenditureCallback() {
                 @Override
                 public void act(Task<QuerySnapshot> task) {
-                    float budget_value = Float.valueOf((editTextBudget.getText().toString()));
-                    int expense = Integer.parseInt(task.getResult().getDocuments().get(0).get("expense").toString());
-                    remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
+                    if (!editTextBudget.getText().toString().isEmpty()) {
+                        float budget_value = Float.valueOf((editTextBudget.getText().toString()));
+                        int expense = Integer.parseInt(task.getResult().getDocuments().get(0).get("expense").toString());
+                        remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
+                    }
                 }
             }
         );
-        Log.d(TAG, "expViewModel.display_remaining success?");
 
         submit_budget_value.setOnClickListener(new View.OnClickListener() {
             @Override

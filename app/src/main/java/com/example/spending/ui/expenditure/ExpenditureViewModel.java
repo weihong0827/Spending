@@ -25,8 +25,12 @@ public class ExpenditureViewModel extends ViewModel {
         HashMap<String, Object> budgetMap = new HashMap<>();
         budgetMap.put("budget", budget_value);
         budgetMap.put("user_id", user_id);
-        db.collection("budget").document("budget_fixeddocumentid").set(budgetMap);
-        Log.d(TAG, "Added " + budget_value + " to firebase");
+        if (!db.collection("budget").whereEqualTo("user_id", user_id).get().isSuccessful()) {
+            db.collection("budget").document().update(budgetMap);
+        } else {
+            db.collection("budget").document("budget_fixeddocumentid").set(budgetMap);
+            Log.d(TAG, "Added " + budget_value + " to firebase");
+        }
 //                .set(task -> {
 //            if (task.isSuccessful()) {
 //                Log.d(TAG, "logcat Added " + budget_value + " to firebase with ID: " + task.getResult().getId());
@@ -68,39 +72,17 @@ public class ExpenditureViewModel extends ViewModel {
 
         db.collection("budget").whereEqualTo("user_id", user_id).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                Log.d(TAG, String.valueOf(task));
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    Log.d(TAG, document.getId() + " => " + document.getData());
-                }
                 callback.act(task);
             }
         });
-
     }
-
-//    public void updateBudget(String budget_value) {
-//        db.collection("budget").document("budget_fixeddocumentid").update("budget", budget_value);
-//    }
 
     public void display_remaining(String user_id, final ExpenditureCallback callback) {
         db.collection("expense").whereEqualTo("user_id", user_id).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-//                System.out.println("successful");
-//                System.out.println(task);
-//                for (QueryDocumentSnapshot document : task.getResult()) {
-//                    Log.d(TAG, document.getId() + " => " + document.getData());
-//                }
                 callback.act(task);
             }
         });
-//        if (!editTextBudget.getText().toString().equals("")) {
-//                    System.out.println("entered");
-//                    String budget_value = editTextBudget.getText().toString();
-//                    TextView remaining = (TextView) view.findViewById(R.id.remaining_value);
-//                    remaining.setText(String.valueOf(remaining_value));
-//                }
-//        v = budget_value - hisViewModel.getItem(total_amount)
-//        TextView.setText(v);
     }
 
     public float calculation(float budget, float expenses) {
