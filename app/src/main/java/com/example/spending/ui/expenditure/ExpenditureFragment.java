@@ -85,7 +85,7 @@ public class ExpenditureFragment extends Fragment {
             public void onClick(View v) {
                 float budget_value = Float.parseFloat(editTextBudget.getText().toString());
                 expViewModel.addBudget("1", budget_value);
-//                I don't need to use a callback for this right? I can just make use of the same var budget_value?
+//                I don't need to use a callback to editTextBudget.setText() right? I can just make use of the same var budget_value?
 //                expViewModel.getBudget("1", new ExpenditureCallback() {
 //                    @Override
 //                    public void act(Task<QuerySnapshot> task) {
