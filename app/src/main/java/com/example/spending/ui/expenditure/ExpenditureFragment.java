@@ -68,7 +68,7 @@ public class ExpenditureFragment extends Fragment {
         expViewModel.display_remaining("1", new ExpenditureCallback() {
                 @Override
                 public void act(Task<QuerySnapshot> task) {
-                    float budget_value = Float.valueOf(String.valueOf(editTextBudget.getText()));
+                    float budget_value = Float.valueOf((editTextBudget.getText().toString()));
                     int expense = Integer.parseInt(task.getResult().getDocuments().get(0).get("expense").toString());
                     remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
                 }

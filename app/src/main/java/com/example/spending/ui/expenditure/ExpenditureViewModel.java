@@ -25,8 +25,8 @@ public class ExpenditureViewModel extends ViewModel {
         HashMap<String, Object> budgetMap = new HashMap<>();
         budgetMap.put("budget", budget_value);
         budgetMap.put("user_id", user_id);
-        db.collection("budget").document("budget_fixeddocumentid").set(budgetMap);
-        System.out.println("system Added " + budget_value + " to firebase");
+        db.collection("budget").add(budgetMap);
+        System.out.println("system Added " + budget_value + " to firebase with Idk what ID");
 //                .set(task -> {
 //            if (task.isSuccessful()) {
 //                Log.d(TAG, "logcat Added " + budget_value + " to firebase with ID: " + task.getResult().getId());
