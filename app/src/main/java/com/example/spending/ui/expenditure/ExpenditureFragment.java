@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.eazegraph.lib.charts.PieChart;
 import org.w3c.dom.Text;
 
 public class ExpenditureFragment extends Fragment {
@@ -52,6 +53,24 @@ public class ExpenditureFragment extends Fragment {
         EditText editTextBudget = (EditText) view.findViewById(R.id.budget_value);
         Button submit_budget_value = (Button) view.findViewById(R.id.submit_budget_value);
         TextView remaining_value = (TextView) view.findViewById(R.id.remaining_value);
+        TextView tvGroceries, tvFurniture, tvIT, tvDailyNecessities, tvOthers;
+        PieChart pieChart;
+
+        // Link those objects with their
+        // respective id's that
+        // we have given in .XML file
+        tvGroceries = view.findViewById(R.id.tvGroceries);
+        tvFurniture = view.findViewById(R.id.tvFurniture);
+        tvIT = view.findViewById(R.id.tvIT);
+        tvDailyNecessities = view.findViewById(R.id.tvDailyNecessities);
+        tvOthers = view.findViewById(R.id.tvOthers);
+        pieChart = view.findViewById(R.id.piechart);
+
+        // A method setData()
+        // to set the text in text view and pie chart
+
+        // Draws pie chart but need to get values from firebase
+        expViewModel.setData(new ExpenditureViewModel());
 
         expViewModel.getBudget("1", new ExpenditureCallback() {
                 @Override
