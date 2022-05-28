@@ -54,17 +54,17 @@ public class ExpenditureFragment extends Fragment {
         Button submit_budget_value = (Button) view.findViewById(R.id.submit_budget_value);
         TextView remaining_value = (TextView) view.findViewById(R.id.remaining_value);
 
-        System.out.println("Before .getBudget");
+        Log.d(TAG, "Before .getBudget");
         expViewModel.getBudget("1", new ExpenditureCallback() {
             @Override
             public void act(Task<QuerySnapshot> task) {
-                System.out.println("Inside.getBudget");
+                Log.d(TAG, "Inside.getBudget");
                 editTextBudget.setText(task.getResult().getDocuments().get(0).get("budget").toString());
             }
         });
-        System.out.println("after .getBudget");
+        Log.d(TAG, "After .getBudget");
 
-        System.out.println("expViewModel.display_remaining failing?");
+        Log.d(TAG, "expViewModel.display_remaining failing?");
         expViewModel.display_remaining("1", new ExpenditureCallback() {
                 @Override
                 public void act(Task<QuerySnapshot> task) {
@@ -74,7 +74,7 @@ public class ExpenditureFragment extends Fragment {
                 }
             }
         );
-        System.out.println("expViewModel.display_remaining success?");
+        Log.d(TAG, "expViewModel.display_remaining success?");
 
         submit_budget_value.setOnClickListener(new View.OnClickListener() {
             @Override

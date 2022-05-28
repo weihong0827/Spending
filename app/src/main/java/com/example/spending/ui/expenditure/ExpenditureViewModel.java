@@ -25,8 +25,8 @@ public class ExpenditureViewModel extends ViewModel {
         HashMap<String, Object> budgetMap = new HashMap<>();
         budgetMap.put("budget", budget_value);
         budgetMap.put("user_id", user_id);
-        db.collection("budget").add(budgetMap);
-        System.out.println("system Added " + budget_value + " to firebase with Idk what ID");
+        db.collection("budget").document("budget_fixeddocumentid").set(budgetMap);
+        Log.d(TAG, "Added " + budget_value + " to firebase");
 //                .set(task -> {
 //            if (task.isSuccessful()) {
 //                Log.d(TAG, "logcat Added " + budget_value + " to firebase with ID: " + task.getResult().getId());
@@ -68,7 +68,7 @@ public class ExpenditureViewModel extends ViewModel {
 
         db.collection("budget").whereEqualTo("user_id", user_id).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                System.out.println(task);
+                Log.d(TAG, String.valueOf(task));
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Log.d(TAG, document.getId() + " => " + document.getData());
                 }
