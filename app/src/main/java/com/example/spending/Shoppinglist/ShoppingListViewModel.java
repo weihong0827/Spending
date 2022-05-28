@@ -41,7 +41,7 @@ public class ShoppingListViewModel extends ViewModel {
         });
     }
 
-    
+
 
     //get item from firebase firestore
     public void getItem(String user_id, final ShoppingListGetItemCallback callback) {
