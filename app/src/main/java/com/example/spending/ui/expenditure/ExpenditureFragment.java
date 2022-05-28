@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -50,38 +51,55 @@ public class ExpenditureFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         EditText editTextBudget = (EditText) view.findViewById(R.id.budget_value);
+        Button submit_budget_value = (Button) view.findViewById(R.id.submit_budget_value);
+        TextView remaining_value = (TextView) view.findViewById(R.id.remaining_value);
+
+        System.out.println("Before .getBudget");
         expViewModel.getBudget("1", new ExpenditureCallback() {
             @Override
             public void act(Task<QuerySnapshot> task) {
+                System.out.println("Inside.getBudget");
                 editTextBudget.setText(task.getResult().getDocuments().get(0).get("budget").toString());
             }
         });
-        editTextBudget.setOnClickListener();
+        System.out.println("after .getBudget");
+
+        System.out.println("expViewModel.display_remaining failing?");
+        expViewModel.display_remaining("1", new ExpenditureCallback() {
+                @Override
+                public void act(Task<QuerySnapshot> task) {
+                    float budget_value = Float.valueOf(String.valueOf(editTextBudget.getText()));
+                    int expense = Integer.parseInt(task.getResult().getDocuments().get(0).get("expense").toString());
+                    remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
+                }
+            }
+        );
+        System.out.println("expViewModel.display_remaining success?");
+
+        submit_budget_value.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void afterTextChanged(Editable s) {
-                String budget_value = editTextBudget.getText().toString();
-                expViewModel.addBudget("1",budget_value);
-                Log.d(TAG, "addedBudget afterTextChanged");
-                TextView textView = (TextView) view.findViewById(R.id.remaining_value);
-                textView. setText(50-20);
-                expViewModel.display_remaining("1",
-                     new ExpenditureCallback() {
-                         @Override
-                         public void act(Task<QuerySnapshot> task) {
-                             int expense = Integer.parseInt(task.getResult().getDocuments().get(0).get("expense").toString());
-                         }
-                     }
+            public void onClick(View v) {
+                float budget_value = Float.parseFloat(editTextBudget.getText().toString());
+                expViewModel.addBudget("1", budget_value);
+//                I don't need to use a callback for this right? I can just make use of the same var budget_value?
+//                expViewModel.getBudget("1", new ExpenditureCallback() {
+//                    @Override
+//                    public void act(Task<QuerySnapshot> task) {
+//                        editTextBudget.setText(task.getResult().getDocuments().get(0).get("budget").toString());
+//                    }
+//                });
+                editTextBudget.setText(Float.toString(budget_value));
+                expViewModel.display_remaining("1", new ExpenditureCallback() {
+                            @Override
+                            public void act(Task<QuerySnapshot> task) {
+                                int number = 0;
+                                int expense = Integer.parseInt(task.getResult().getDocuments().get(0).get("expense").toString());
+                                remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
+                            }
+                        }
                 );
             }
         });
-//        if (!editTextBudget.getText().toString().equals("")) {
-//                    System.out.println("entered");
-//                    String budget_value = editTextBudget.getText().toString();
-//                    TextView remaining = (TextView) view.findViewById(R.id.remaining_value);
-//                    remaining.setText(String.valueOf(remaining_value));
-//                }
-//        v = budget_value - hisViewModel.getItem(total_amount)
-//        TextView.setText(v);
     }
 
     @Override

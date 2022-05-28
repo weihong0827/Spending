@@ -21,7 +21,7 @@ public class ExpenditureViewModel extends ViewModel {
     FirebaseFirestore db;
     public ExpenditureViewModel() { db = FirebaseFirestore.getInstance(); }
 //    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void addBudget(String user_id, String budget_value) {
+    public void addBudget(String user_id, float budget_value) {
         HashMap<String, Object> budgetMap = new HashMap<>();
         budgetMap.put("budget", budget_value);
         budgetMap.put("user_id", user_id);
@@ -71,7 +71,6 @@ public class ExpenditureViewModel extends ViewModel {
                 System.out.println(task);
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Log.d(TAG, document.getId() + " => " + document.getData());
-
                 }
                 callback.act(task);
             }
@@ -86,21 +85,25 @@ public class ExpenditureViewModel extends ViewModel {
     public void display_remaining(String user_id, final ExpenditureCallback callback) {
         db.collection("expense").whereEqualTo("user_id", user_id).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                System.out.println(task);
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    Log.d(TAG, document.getId() + " => " + document.getData());
-
-                }
-                //need a callback here
-
-
+//                System.out.println("successful");
+//                System.out.println(task);
+//                for (QueryDocumentSnapshot document : task.getResult()) {
+//                    Log.d(TAG, document.getId() + " => " + document.getData());
+//                }
                 callback.act(task);
             }
         });
-
+//        if (!editTextBudget.getText().toString().equals("")) {
+//                    System.out.println("entered");
+//                    String budget_value = editTextBudget.getText().toString();
+//                    TextView remaining = (TextView) view.findViewById(R.id.remaining_value);
+//                    remaining.setText(String.valueOf(remaining_value));
+//                }
+//        v = budget_value - hisViewModel.getItem(total_amount)
+//        TextView.setText(v);
     }
 
-    public float calculation(int budget, int expenses) {
+    public float calculation(float budget, float expenses) {
         return budget - expenses;
     }
 }
