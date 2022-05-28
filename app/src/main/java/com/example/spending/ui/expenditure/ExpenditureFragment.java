@@ -2,6 +2,8 @@ package com.example.spending.ui.expenditure;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
 import org.w3c.dom.Text;
 
 public class ExpenditureFragment extends Fragment {
@@ -53,24 +56,9 @@ public class ExpenditureFragment extends Fragment {
         EditText editTextBudget = (EditText) view.findViewById(R.id.budget_value);
         Button submit_budget_value = (Button) view.findViewById(R.id.submit_budget_value);
         TextView remaining_value = (TextView) view.findViewById(R.id.remaining_value);
+
         TextView tvGroceries, tvFurniture, tvIT, tvDailyNecessities, tvOthers;
         PieChart pieChart;
-
-        // Link those objects with their
-        // respective id's that
-        // we have given in .XML file
-        tvGroceries = view.findViewById(R.id.tvGroceries);
-        tvFurniture = view.findViewById(R.id.tvFurniture);
-        tvIT = view.findViewById(R.id.tvIT);
-        tvDailyNecessities = view.findViewById(R.id.tvDailyNecessities);
-        tvOthers = view.findViewById(R.id.tvOthers);
-        pieChart = view.findViewById(R.id.piechart);
-
-        // A method setData()
-        // to set the text in text view and pie chart
-
-        // Draws pie chart but need to get values from firebase
-        expViewModel.setData(new ExpenditureViewModel());
 
         expViewModel.getBudget("1", new ExpenditureCallback() {
             @Override
@@ -124,6 +112,54 @@ public class ExpenditureFragment extends Fragment {
                 );
             }
         });
+
+        // Link those objects with their
+        // respective id's that
+        // we have given in .XML file
+        tvGroceries = view.findViewById(R.id.tvGroceries);
+        tvFurniture = view.findViewById(R.id.tvFurniture);
+        tvIT = view.findViewById(R.id.tvIT);
+        tvDailyNecessities = view.findViewById(R.id.tvDailyNecessities);
+        tvOthers = view.findViewById(R.id.tvOthers);
+        pieChart = view.findViewById(R.id.piechart);
+
+        // to set the text in text view and pie chart
+        // Set the percentage of language used
+        tvGroceries.setText(Integer.toString(40));
+        tvFurniture.setText(Integer.toString(30));
+        tvIT.setText(Integer.toString(5));
+        tvDailyNecessities.setText(Integer.toString(15));
+        tvOthers.setText(Integer.toString(10));
+
+        // Set the data and color to the pie chart
+        pieChart.addPieSlice(
+                new PieModel(
+                        "Groceries",
+                        Integer.parseInt(tvGroceries.getText().toString()),
+                        Color.parseColor("#FFA726")));
+        pieChart.addPieSlice(
+                new PieModel(
+                        "Furniture",
+                        Integer.parseInt(tvFurniture.getText().toString()),
+                        Color.parseColor("#66BB6A")));
+        pieChart.addPieSlice(
+                new PieModel(
+                        "IT",
+                        Integer.parseInt(tvIT.getText().toString()),
+                        Color.parseColor("#EF5350")));
+        pieChart.addPieSlice(
+                new PieModel(
+                        "DailyNecessities",
+                        Integer.parseInt(tvDailyNecessities.getText().toString()),
+                        Color.parseColor("#29B6F6")));
+        pieChart.addPieSlice(
+                new PieModel(
+                        "Others",
+                        Integer.parseInt(tvOthers.getText().toString()),
+                        Color.parseColor("#f629a4")));
+
+        // To animate the pie chart
+        pieChart.startAnimation();
     }
 
     @Override
