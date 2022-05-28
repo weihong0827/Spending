@@ -12,11 +12,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        android:background="@color/sand1"
+        app:itemIconTint="@drawable/nav_buttons_selector"
+        app:itemRippleColor="@color/blue2"
+        app:itemTextColor="@drawable/nav_buttons_selector"
+        app:menu="@menu/bottom_nav_menu"/>
 
     <fragment
         android:id="@+id/nav_host_fragment_activity_main"
@@ -31,3 +34,5 @@
         app:navGraph="@navigation/mobile_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!-- android:background="?android:attr/windowBackground" -->
