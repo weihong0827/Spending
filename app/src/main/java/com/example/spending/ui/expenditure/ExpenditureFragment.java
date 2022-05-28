@@ -59,7 +59,9 @@ public class ExpenditureFragment extends Fragment {
             @Override
             public void act(Task<QuerySnapshot> task) {
                 System.out.println("Inside.getBudget");
-                editTextBudget.setText(task.getResult().getDocuments().get(0).get("budget").toString());
+                if(!(editTextBudget.getText().toString().isEmpty())){
+                    editTextBudget.setText(task.getResult().getDocuments().get(0).get("budget").toString());
+                }
             }
         });
         System.out.println("after .getBudget");
@@ -68,9 +70,11 @@ public class ExpenditureFragment extends Fragment {
         expViewModel.display_remaining("1", new ExpenditureCallback() {
                 @Override
                 public void act(Task<QuerySnapshot> task) {
-                    float budget_value = Float.valueOf(String.valueOf(editTextBudget.getText()));
-                    int expense = Integer.parseInt(task.getResult().getDocuments().get(0).get("expense").toString());
-                    remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
+                    if(!editTextBudget.getText().toString().isEmpty()) {
+                        float budget_value = Float.valueOf(String.valueOf(editTextBudget.getText()));
+                        int expense = Integer.parseInt(task.getResult().getDocuments().get(0).get("expense").toString());
+                        remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
+                    }
                 }
             }
         );
