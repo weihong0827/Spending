@@ -29,7 +29,9 @@ public class ExpenditureViewModel extends ViewModel {
         HashMap<String, Object> budgetMap = new HashMap<>();
         budgetMap.put("budget_value", budget_value);
         budgetMap.put("user_id", user_id);
+        Log.d(TAG, String.valueOf(budgetMap));
         // ##################################################################################### why can't firebase update? Is it cause my firebase not working?
+        // ##################################################################################### even Wei Hong's { db.collection("shopping list").add(itemMap) } not working also
         db.collection("budget").document("testUpdate").update(budgetMap);
         Log.d(TAG, "addBudget: tested doc().update");
         db.collection("budget").document("testSet").set(budgetMap);
