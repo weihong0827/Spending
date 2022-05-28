@@ -46,9 +46,7 @@ public class ShoppingList extends Fragment {
         mViewModel = new ViewModelProvider(this).get(ShoppingListViewModel.class);
 
         return inflater.inflate(R.layout.shopping_list_fragment, container, false);
-
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
