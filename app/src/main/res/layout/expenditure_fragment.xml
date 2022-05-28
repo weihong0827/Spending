@@ -13,8 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:text="Monthly Expenditure" />
+        android:layout_marginTop="25dp"
+        android:text="@string/monthly_expenditure"
+        android:textSize="27sp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -29,7 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:text="Your budget for this month:" />
+        android:text="@string/your_budget_this_month"
+        android:textSize="27sp" />
 
     <EditText
         android:id="@+id/budget_value"
@@ -37,7 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:hint="$200"
+        android:hint="@string/_200"
+        android:textSize="27sp"
         android:inputType="number" />
 
     <Button
@@ -45,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Update your budget" />
+        android:text="@string/update_budget" />
 
     <TextView
         android:id="@+id/remaining"
@@ -53,7 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:text="Leftover amount:" />
+        android:text="@string/leftover_amount"
+        android:textSize="27sp" />
 
     <TextView
         android:id="@+id/remaining_value"
@@ -61,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:text="remaining_value"
-        android:textSize="32sp" />
+        android:text="@string/update_budget_above"
+        android:textSize="20sp" />
 
 </LinearLayout>

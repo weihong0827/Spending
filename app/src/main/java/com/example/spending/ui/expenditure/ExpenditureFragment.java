@@ -45,7 +45,6 @@ public class ExpenditureFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.expenditure_fragment, container, false);
         return rootView;
-
     }
 
     @Override
@@ -55,22 +54,28 @@ public class ExpenditureFragment extends Fragment {
         TextView remaining_value = (TextView) view.findViewById(R.id.remaining_value);
 
         expViewModel.getBudget("1", new ExpenditureCallback() {
-            @Override
-            public void act(Task<QuerySnapshot> task) {
-                if (!editTextBudget.getText().toString().isEmpty()) {
-                    editTextBudget.setText(task.getResult().getDocuments().get(0).get("budget").toString());
-                }
-            }
-        });
-
-        expViewModel.display_remaining("1", new ExpenditureCallback() {
                 @Override
                 public void act(Task<QuerySnapshot> task) {
-                    if (!editTextBudget.getText().toString().isEmpty()) {
-                        float budget_value = Float.valueOf((editTextBudget.getText().toString()));
-                        int expense = Integer.parseInt(task.getResult().getDocuments().get(0).get("expense").toString());
-                        remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
+                    Log.d(TAG, "2nd callback");
+                    if (!String.valueOf(task.getResult().getDocuments().get(0).get("budget")).isEmpty()) {
+                        editTextBudget.setText(String.valueOf(task.getResult().getDocuments().get(0).get("budget")));
                     }
+                    Log.d(TAG, "end of 2nd callback");
+
+                    expViewModel.display_remaining("1", new ExpenditureCallback() {
+                                @Override
+                                public void act(Task<QuerySnapshot> task) {
+                                    Log.d(TAG, "first callback");
+                                    if (!editTextBudget.getText().toString().isEmpty()) {
+                                        float budget_value = Float.parseFloat(String.valueOf(editTextBudget.getText()));
+                                        float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
+                                        remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
+                                    }
+                                    Log.d(TAG, "end of first callback");
+                                }
+                            }
+                    );
+
                 }
             }
         );
@@ -87,12 +92,11 @@ public class ExpenditureFragment extends Fragment {
 //                        editTextBudget.setText(task.getResult().getDocuments().get(0).get("budget").toString());
 //                    }
 //                });
-                editTextBudget.setText(Float.toString(budget_value));
+                editTextBudget.setText(String.valueOf(budget_value));
                 expViewModel.display_remaining("1", new ExpenditureCallback() {
                             @Override
                             public void act(Task<QuerySnapshot> task) {
-                                int number = 0;
-                                int expense = Integer.parseInt(task.getResult().getDocuments().get(0).get("expense").toString());
+                                float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
                                 remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
                             }
                         }
