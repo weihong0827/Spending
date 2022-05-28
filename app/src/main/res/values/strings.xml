@@ -9,6 +9,9 @@
 
     <string name="title_shopping_list">Shopping List</string>
     <string name="title_add_to_list">Add To List</string>
+    <string name="title_expenditure">Expenditure</string>
+    <string name="title_upload_receipt">Upload Receipt</string>
+
     <string name="label_item_input">Item Name</string>
     <string name="label_select_category">Select item category</string>
     <string name="cancel_button">Cancel</string>
