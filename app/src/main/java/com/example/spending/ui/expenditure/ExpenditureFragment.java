@@ -50,32 +50,13 @@ public class ExpenditureFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         EditText editTextBudget = (EditText) view.findViewById(R.id.budget_value);
-
         expViewModel.getBudget("1", new ExpenditureCallback() {
             @Override
             public void act(Task<QuerySnapshot> task) {
                 editTextBudget.setText(task.getResult().getDocuments().get(0).get("budget").toString());
             }
-        }); // supposed to replace with expViewModel.getBudget2();
-        editTextBudget.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (!editTextBudget.getText().toString().equals("")) {
-//                    System.out.println("entered");
-//                    String budget_value = editTextBudget.getText().toString();
-//                    TextView remaining = (TextView) view.findViewById(R.id.remaining_value);
-//                    int v = Integer.parseInt(budget_value);
-//                    int total_amount = 50;
-//                    int remaining_value = v - total_amount;
-//                    remaining.setText(String.valueOf(remaining_value));
-//                }
-            }
-
+        });
+        editTextBudget.setOnClickListener();
             @Override
             public void afterTextChanged(Editable s) {
                 String budget_value = editTextBudget.getText().toString();
@@ -93,6 +74,12 @@ public class ExpenditureFragment extends Fragment {
                 );
             }
         });
+//        if (!editTextBudget.getText().toString().equals("")) {
+//                    System.out.println("entered");
+//                    String budget_value = editTextBudget.getText().toString();
+//                    TextView remaining = (TextView) view.findViewById(R.id.remaining_value);
+//                    remaining.setText(String.valueOf(remaining_value));
+//                }
 //        v = budget_value - hisViewModel.getItem(total_amount)
 //        TextView.setText(v);
     }
