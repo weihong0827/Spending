@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        setContentView(R.layout.expenditure_fragment);
-
         // Link those objects with their
         // respective id's that
         // we have given in .XML file

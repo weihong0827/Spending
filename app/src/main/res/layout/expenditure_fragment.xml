@@ -13,11 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:text="Monthly Expenditure" />
+        android:layout_marginTop="20dp"
+        android:text="@string/monthly_expenditure"
+        android:textSize="20sp" />
 
     <RelativeLayout
-
         android:layout_width="match_parent"
         android:layout_height="204dp"
         android:background="@color/color_white"
@@ -29,7 +29,6 @@
             android:layout_height="200dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="15dp"
             android:elevation="10dp"
             app:cardCornerRadius="10dp">
 
@@ -48,9 +47,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     android:layout_weight="1"
-                    android:padding="5dp"
-
-                    />
+                    android:padding="5dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -72,18 +69,19 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:paddingStart="10dp"
-                            android:text="Groceries"
+                            android:text="@string/groceries"
                             tools:ignore="RtlSymmetry" />
-
+                        <!---->
                         <TextView
                             android:id="@+id/tvGroceries"
                             android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
                             android:layout_alignParentEnd="true"
                             android:fontFamily="sans-serif-light"
-                            android:text="0"
+                            android:text="@string/_0"
                             android:textAlignment="textEnd"
                             android:textColor="@color/color_one"
                             android:textSize="18sp"
@@ -104,18 +102,19 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:paddingStart="10dp"
-                            android:text="Furniture"
+                            android:text="@string/furniture"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
                             android:id="@+id/tvFurniture"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
                             android:layout_alignParentEnd="true"
                             android:fontFamily="sans-serif-light"
-                            android:text="0"
+                            android:text="@string/_0"
                             android:textAlignment="textEnd"
                             android:textColor="@color/color_one"
                             android:textSize="18sp"
@@ -136,18 +135,19 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:paddingStart="10dp"
-                            android:text="IT"
+                            android:text="@string/it"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
                             android:id="@+id/tvIT"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
                             android:layout_alignParentEnd="true"
                             android:fontFamily="sans-serif-light"
-                            android:text="0"
+                            android:text="@string/_0"
                             android:textAlignment="textEnd"
                             android:textColor="@color/color_one"
                             android:textSize="18sp"
@@ -168,18 +168,19 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:paddingStart="10dp"
-                            android:text="DailyNecessities"
+                            android:text="@string/daily_necessities"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
                             android:id="@+id/tvDailyNecessities"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
                             android:layout_alignParentEnd="true"
                             android:fontFamily="sans-serif-light"
-                            android:text="0"
+                            android:text="@string/_0"
                             android:textAlignment="textEnd"
                             android:textColor="@color/color_one"
                             android:textSize="18sp"
@@ -200,18 +201,19 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:paddingStart="10dp"
-                            android:text="Others"
+                            android:text="@string/others"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
                             android:id="@+id/tvOthers"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
                             android:layout_alignParentEnd="true"
                             android:fontFamily="sans-serif-light"
-                            android:text="0"
+                            android:text="@string/_0"
                             android:textAlignment="textEnd"
                             android:textColor="@color/color_one"
                             android:textSize="18sp"
@@ -233,18 +235,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:text="@string/your_budget_this_month"
-        android:textSize="27sp" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/budget_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:hint="@string/_200"
-        android:textSize="27sp"
+        android:textSize="25sp"
         android:inputType="number" />
 
     <Button
@@ -252,6 +254,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
         android:text="@string/update_budget" />
 
     <TextView
@@ -259,17 +262,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:text="@string/leftover_amount"
-        android:textSize="27sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/remaining_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="15dp"
         android:text="@string/update_budget_above"
-        android:textSize="20sp" />
+        android:textSize="25sp" />
 
 </LinearLayout>

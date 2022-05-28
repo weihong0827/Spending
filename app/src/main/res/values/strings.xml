@@ -8,12 +8,6 @@
     <string name="title_notifications">Notifications</string>
     <string name="add_item">Add Item</string>
     <string name="what_to_buy">What to buy?</string>
-    <string name="update_budget_above">Please update your budget above</string>
-    <string name="leftover_amount">Leftover amount:</string>
-    <string name="update_budget">Update your budget</string>
-    <string name="_200">$200</string>
-    <string name="your_budget_this_month">Your budget for this month</string>
-    <string name="monthly_expenditure">Monthly Expenditure</string>
     <string-array name="Category">
         <item>Groceries</item>
         <item>Furniture</item>
@@ -21,4 +15,18 @@
         <item>Daily Necessities</item>
         <item>Others</item>
     </string-array>
+
+    <string name="update_budget_above">Please update your budget above</string>
+    <string name="leftover_amount">Leftover amount:</string>
+    <string name="update_budget">Update your budget</string>
+    <string name="_200">$200</string>
+    <string name="your_budget_this_month">Your budget for this month</string>
+    <string name="monthly_expenditure">Monthly Expenditure</string>
+    <string name="_0">0</string>
+
+    <string name="others">Others</string>
+    <string name="daily_necessities">DailyNecessities</string>
+    <string name="it">IT</string>
+    <string name="furniture">Furniture</string>
+    <string name="groceries">Groceries</string>
 </resources>
