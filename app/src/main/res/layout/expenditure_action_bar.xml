@@ -19,7 +19,7 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
-        
+
     </RelativeLayout>
 
 </LinearLayout>
