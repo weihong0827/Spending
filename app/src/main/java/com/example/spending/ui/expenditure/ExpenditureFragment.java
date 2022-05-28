@@ -60,17 +60,30 @@ public class ExpenditureFragment extends Fragment {
         expViewModel.getBudget("1", new ExpenditureCallback() {
             @Override
                 public void act(Task<QuerySnapshot> task) {
-                    if (!String.valueOf(task.getResult().getDocuments().get(0).get("budget")).isEmpty()) {
-                        editTextBudget.setText(String.valueOf(task.getResult().getDocuments().get(0).get("budget")));
+                    if (!String.valueOf(task.getResult().getDocuments().get(0).get("budget_value")).isEmpty()) {
+                        editTextBudget.setText(String.valueOf(task.getResult().getDocuments().get(0).get("budget_value")));
                     }
 
                     expViewModel.display_remaining("1", new ExpenditureCallback() {
                         @Override
                             public void act(Task<QuerySnapshot> task) {
-                                if (!editTextBudget.getText().toString().isEmpty()) {
+                                if (!String.valueOf(editTextBudget.getText()).equals("null")) {
                                     float budget_value = Float.parseFloat(String.valueOf(editTextBudget.getText()));
                                     float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
                                     remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
+                                } else {
+                                    // can use try {
+                                    //      } catch {
+                                    //      while (budget_value == Null) {
+                                    //          logd("Still Null");
+                                    //          delay(3000);
+                                    //          Float.parseFloat(...);
+                                    //          }
+                                    //      } finally {                // don't know if need use finally or not
+                                    //      float expense =
+                                    //      remaining_value.setText(...)
+                                    //      }
+                                    Log.d(TAG, "act: editTextBudget is Null");
                                 }
                                 Log.d(TAG, "Expenditure page finished loading");
                             }
