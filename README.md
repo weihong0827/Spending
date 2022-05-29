@@ -6,18 +6,18 @@ Spending is an online database shopping list, easily accessible via the user’s
 
 ## Instructions
 
-Tap on Profile page on the right of bottom navigation bar
-Log in using email and password
-Tap on Shopping list page on the left of the bottom navigation bar 
-Add the items that you want to buy
-Tap on Expenditure page on the bottom navigation bar
-Input monthly budget
-When going on a shopping spree, you can check off items in the Shopping List to know if you have gotten what you need
-After each purchase, take a photo of the receipt
-Tap on the Upload button at bottom navigation bar to upload that receipt to the database
-After the receipt is loaded, edit or delete the details from OCR accordingly
-Once confirmed, tap on “Upload Receipt” on top left only once
-You can then see your transaction history
+Tap on Profile page on the right of bottom navigation bar \
+Log in using email and password \
+Tap on Shopping list page on the left of the bottom navigation bar \
+Add the items that you want to buy \
+Tap on Expenditure page on the bottom navigation bar \
+Input monthly budget \
+When going on a shopping spree, you can check off items in the Shopping List to know if you have gotten what you need \
+After each purchase, take a photo of the receipt \
+Tap on the Upload button at bottom navigation bar to upload that receipt to the database \
+After the receipt is loaded, edit or delete the details from OCR accordingly \
+Once confirmed, tap on “Upload Receipt” on top left only once \
+You can then see your transaction history \
 
 ## Requirements
 
