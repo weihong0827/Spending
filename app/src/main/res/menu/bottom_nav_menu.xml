@@ -2,9 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/shoppingList"
+        android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_shoppingList"
+        android:icon="@drawable/common_google_signin_btn_icon_dark_normal"
+        android:title="@string/title_shoppinglist" />
 
     <item
         android:id="@+id/navigation_dashboard"
@@ -14,6 +19,11 @@
         android:id="@+id/uploadReciept"
         android:icon="@drawable/ic_baseline_file_upload_24"
         android:title="@string/upload" />
+
+    <item
+        android:id="@+id/navigation_expenditure"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_expenditure" />
 
     <item
         android:id="@+id/navigation_notifications"

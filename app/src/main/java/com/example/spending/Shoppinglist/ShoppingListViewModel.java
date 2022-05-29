@@ -41,8 +41,6 @@ public class ShoppingListViewModel extends ViewModel {
         });
     }
 
-    
-
     //get item from firebase firestore
     public void getItem(String user_id, final ShoppingListGetItemCallback callback) {
         //firebase firestore get record
@@ -57,6 +55,7 @@ public class ShoppingListViewModel extends ViewModel {
             }
         });
     }
+
 //    public void updateItem(String document, final ShoppingListCallback callback) {
 //
 //    }

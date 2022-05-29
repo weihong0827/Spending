@@ -8,9 +8,26 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+
+
+    <color name="colorPrimary">#024265</color>
+    <color name="colorPrimaryDark">#024265</color>
+    <color name="colorAccent">#05af9b</color>
+
+    <color name="color_one">#fb7268</color>
+    <color name="color_white">#ededf2</color>
+    <color name="color_two">#E3E0E0</color>
+
+    <color name="Groceries">#FFA726</color>
+    <color name="Furniture">#66BB6A</color>
+    <color name="IT">#EF5350</color>
+    <color name="DailyNecessities">#29B6F6</color>
+    <color name="Others">#f629a4</color>
+
     <color name="blue1">#BCD3F2</color>
     <color name="blue2">#80A4ED</color>
     <color name="green">#395C6B</color>
     <color name="sand1">#E6E1C5</color>
     <color name="sand2">#D4CB92</color>
+
 </resources>
