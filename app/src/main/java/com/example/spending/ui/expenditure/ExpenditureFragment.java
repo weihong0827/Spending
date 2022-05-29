@@ -79,7 +79,8 @@ public class ExpenditureFragment extends Fragment {
                                     public void act(Task<QuerySnapshot> task) {
                                         if (!String.valueOf(editTextBudget.getText()).equals("null")) {
                                             float budget_value = Float.parseFloat(String.valueOf(editTextBudget.getText()));
-                                            float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
+//                                            float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
+                                            float expense = 50.0f;
                                             remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
                                         } else {
                                             // can use try {
