@@ -19,10 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.expenditure.Expenditure_java"
-            android:parentActivityName=".MainActivity">
-        </activity>
     </application>
 
 </manifest>

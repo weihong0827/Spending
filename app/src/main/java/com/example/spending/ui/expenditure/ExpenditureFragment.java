@@ -37,6 +37,10 @@ public class ExpenditureFragment extends Fragment {
     private ExpenditureViewModel expViewModel;
     private ShoppingListViewModel mViewModel;
     private static final String TAG = "Expenditure";
+
+    TextView tvGroceries, tvFurniture, tvIT, tvDailyNecessities, tvOthers;
+    PieChart pieChart;
+
     public static ExpenditureFragment newInstance() {
         return new ExpenditureFragment();
     }
@@ -54,48 +58,54 @@ public class ExpenditureFragment extends Fragment {
     @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        expViewModel = new ViewModelProvider(this).get(ExpenditureViewModel.class);
+
         EditText editTextBudget = (EditText) view.findViewById(R.id.budget_value);
         Button submit_budget_value = (Button) view.findViewById(R.id.submit_budget_value);
         TextView remaining_value = (TextView) view.findViewById(R.id.remaining_value);
 
-        TextView tvGroceries, tvFurniture, tvIT, tvDailyNecessities, tvOthers;
-        PieChart pieChart;
-
         expViewModel.getBudget("1", new ExpenditureCallback() {
-            @Override
-                public void act(Task<QuerySnapshot> task) {
-                    if (!String.valueOf(task.getResult().getDocuments().get(0).get("budget_value")).isEmpty()) {
-                        editTextBudget.setText(String.valueOf(task.getResult().getDocuments().get(0).get("budget_value")));
+                    @Override
+                    public void act(Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (task.getResult().getDocuments().size() > 0) {
+                                if (!String.valueOf(task.getResult().getDocuments().get(0).get("budget_value")).isEmpty()) {
+                                    editTextBudget.setText(String.valueOf(task.getResult().getDocuments().get(0).get("budget_value")));
+                                }
+                            }
+
+                            expViewModel.display_remaining("1", new ExpenditureCallback() {
+                                        @Override
+                                        public void act(Task<QuerySnapshot> task) {
+                                            if (!String.valueOf(editTextBudget.getText()).equals("null")) {
+                                                float budget_value = 100F; // supposed to be Float.parseFloat(String.valueOf(editTextBudget.getText()));
+//                                            float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
+                                                float expense = 50.0f;
+                                                remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
+                                            } else {
+                                                // can use try {
+                                                //      } catch {
+                                                //      while (budget_value == Null) {
+                                                //          logd("Still Null");
+                                                //          delay(3000);
+                                                //          Float.parseFloat(...);
+                                                //          }
+                                                //      } finally {                // don't know if need use finally or not
+                                                //      float expense =
+                                                //      remaining_value.setText(...)
+                                                //      }
+                                                Log.d(TAG, "act: editTextBudget is Null");
+                                            }
+                                            Log.d(TAG, "Expenditure page finished loading");
+                                        }
+                                    }
+                            );
+                        }
                     }
 
-                    expViewModel.display_remaining("1", new ExpenditureCallback() {
-                        @Override
-                            public void act(Task<QuerySnapshot> task) {
-                                if (!String.valueOf(editTextBudget.getText()).equals("null")) {
-                                    float budget_value = Float.parseFloat(String.valueOf(editTextBudget.getText()));
-                                    float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
-                                    remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
-                                } else {
-                                    // can use try {
-                                    //      } catch {
-                                    //      while (budget_value == Null) {
-                                    //          logd("Still Null");
-                                    //          delay(3000);
-                                    //          Float.parseFloat(...);
-                                    //          }
-                                    //      } finally {                // don't know if need use finally or not
-                                    //      float expense =
-                                    //      remaining_value.setText(...)
-                                    //      }
-                                    Log.d(TAG, "act: editTextBudget is Null");
-                                }
-                                Log.d(TAG, "Expenditure page finished loading");
-                            }
-                        }
-                    );
-                }
-            }
-        );
+                    ;
+                });
 
         submit_budget_value.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +116,7 @@ public class ExpenditureFragment extends Fragment {
                 expViewModel.display_remaining("1", new ExpenditureCallback() {
                     @Override
                         public void act(Task<QuerySnapshot> task) {
-                            float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
+                            float expense = 50F; // supposed to be Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
                             remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
                         }
                     }
@@ -117,78 +127,85 @@ public class ExpenditureFragment extends Fragment {
         expViewModel.getExpenses("1", new ExpensesCallback() {
             @Override
             public void act(Task<QuerySnapshot> task) {
+                float groceries_total_amount = 0;
+                float furniture_prices = 0;
+                float it_prices = 0;
+                float daily_prices = 0;
+                float others_prices = 0;
                 for (int i = 0; i < task.getResult().size(); i++) {
                     // split each document into different categories
-                    if (task.getResult().getDocuments().whereEqualsTo("user_id", user_id).get("category").isEquals("Groceries")) {
-                        float groceries_total_amount += task.getResult().getDocuments().get(i).get("price");
-                    }
-                    String category = task.getResult().getDocuments().get(i).
-                    if (category == "Furniture") {
-                        float furniture_prices += task.getResult().getDocuments().get(i).get("price").toString();
+
+                    String category = task.getResult().getDocuments().get(i).get("category").toString();
+                    if (category.equals("Groceries")) {
+                        groceries_total_amount += Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(i).get("price")));
+                    }else if (category.equals("Furniture")) {
+                        furniture_prices += Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(i).get("price")));
+                    }else if (category.equals("IT")) {
+                        it_prices += Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(i).get("price")));
+                    } else if (category.equals("Daily")) {
+                        daily_prices += Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(i).get("price")));
+                    }else{
+                        others_prices += Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(i).get("price")));
                     }
                     // repeat either one of the above for other categories once its confirm working #####################################################
-            };
-            // how to call function in View.java file? #######################################
-            ....drawGraph(groceries_prices, ...);
-        );
+                } ;
+                drawGraph(groceries_total_amount,furniture_prices,it_prices,daily_prices,others_prices,view);
+            }
 
-        // why need to initialise input variables to be 0? ################################################################
-        public void drawGraph(float groceries_prices, float furniture_prices = 0, float it_prices, float daily_prices, float others_prices) {
+            ;
+        });
 
-            // Link those objects with their
-            // respective id's that
-            // we have given in .XML file
-            tvGroceries = view.findViewById(R.id.tvGroceries);
-            tvFurniture = view.findViewById(R.id.tvFurniture);
-            tvIT = view.findViewById(R.id.tvIT);
-            tvDailyNecessities = view.findViewById(R.id.tvDailyNecessities);
-            tvOthers = view.findViewById(R.id.tvOthers);
-            pieChart = view.findViewById(R.id.piechart);
 
-            // to set the text in text view and pie chart
-            // Set the percentage of language used
-            tvGroceries.setText(Float.toString(groceries_prices));
-            tvFurniture.setText(Float.toString(furniture_prices));
-            tvIT.setText(Float.toString(it_prices));
-            tvDailyNecessities.setText(Float.toString(daily_prices));
-            tvOthers.setText(Float.toString(others_prices));
+    };
+    // why need to initialise input variables to be 0? ################################################################
+    public void drawGraph(float groceries_prices, float furniture_prices, float it_prices, float daily_prices, float others_prices,View view) {
 
-            // Set the data and color to the pie chart
-            pieChart.addPieSlice(
-                    new PieModel(
-                            "Groceries",
-                            groceries_prices,
-                            Color.parseColor("#FFA726")));
-            pieChart.addPieSlice(
-                    new PieModel(
-                            "Furniture",
-                            furniture_prices,
-                            Color.parseColor("#66BB6A")));
-            pieChart.addPieSlice(
-                    new PieModel(
-                            "IT",
-                            it_prices,
-                            Color.parseColor("#EF5350")));
-            pieChart.addPieSlice(
-                    new PieModel(
-                            "DailyNecessities",
-                            daily_prices,
-                            Color.parseColor("#29B6F6")));
-            pieChart.addPieSlice(
-                    new PieModel(
-                            "Others",
-                            others_prices,
-                            Color.parseColor("#f629a4")));
+        // Link those objects with their
+        // respective id's that
+        // we have given in .XML file
+        tvGroceries = view.findViewById(R.id.tvGroceries);
+        tvFurniture = view.findViewById(R.id.tvFurniture);
+        tvIT = view.findViewById(R.id.tvIT);
+        tvDailyNecessities = view.findViewById(R.id.tvDailyNecessities);
+        tvOthers = view.findViewById(R.id.tvOthers);
+        pieChart = view.findViewById(R.id.piechart);
 
-            // To animate the pie chart
-            pieChart.startAnimation();
-        }
-    }
+        // to set the text in text view and pie chart
+        // Set the percentage of language used
+        tvGroceries.setText(Float.toString(groceries_prices));
+        tvFurniture.setText(Float.toString(furniture_prices));
+        tvIT.setText(Float.toString(it_prices));
+        tvDailyNecessities.setText(Float.toString(daily_prices));
+        tvOthers.setText(Float.toString(others_prices));
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        expViewModel = new ViewModelProvider(this).get(ExpenditureViewModel.class);
-        // TODO: Use the ViewModel
+        // Set the data and color to the pie chart
+        pieChart.addPieSlice(
+                new PieModel(
+                        "Groceries",
+                        groceries_prices,
+                        Color.parseColor("#FFA726")));
+        pieChart.addPieSlice(
+                new PieModel(
+                        "Furniture",
+                        furniture_prices,
+                        Color.parseColor("#66BB6A")));
+        pieChart.addPieSlice(
+                new PieModel(
+                        "IT",
+                        it_prices,
+                        Color.parseColor("#EF5350")));
+        pieChart.addPieSlice(
+                new PieModel(
+                        "DailyNecessities",
+                        daily_prices,
+                        Color.parseColor("#29B6F6")));
+        pieChart.addPieSlice(
+                new PieModel(
+                        "Others",
+                        others_prices,
+                        Color.parseColor("#f629a4")));
+
+        // To animate the pie chart
+        pieChart.startAnimation();
     }
 }
