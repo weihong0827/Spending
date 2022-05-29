@@ -166,9 +166,9 @@ public class ExpenditureFragment extends Fragment {
             public void onClick(View v) {
                 if (user!=null) {
                     float budget_value = Float.parseFloat(editTextBudget.getText().toString());
-                    String tag = editTextBudget.getTag().toString();
-                    if (!tag.isEmpty()) {
-                        expViewModel.updateBudget(tag, budget_value);
+                    Object tag = editTextBudget.getTag();
+                    if (tag!=null) {
+                        expViewModel.updateBudget(tag.toString(), budget_value);
                         remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, total_spent)));
 
                     }else{
@@ -177,8 +177,8 @@ public class ExpenditureFragment extends Fragment {
                         expViewModel.display_remaining(user.getUid(), new ExpenditureCallback() {
                                     @Override
                                     public void act(Task<QuerySnapshot> task) {
-                                        float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
-                                        remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
+//                                        float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
+                                        remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, total_spent)));
                                     }
                                 }
                         );
