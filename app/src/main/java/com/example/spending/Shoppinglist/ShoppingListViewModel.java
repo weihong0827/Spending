@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.time.LocalDateTime;
@@ -45,7 +46,7 @@ public class ShoppingListViewModel extends ViewModel {
     public void getItem(String user_id, final ShoppingListGetItemCallback callback) {
         //firebase firestore get record
 
-        db.collection("shopping list").whereEqualTo("user_id", user_id).get().addOnCompleteListener(task -> {
+        db.collection("shopping list").whereEqualTo("user_id", user_id).orderBy("Time.nano", Query.Direction.DESCENDING).whereEqualTo("checked",false).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Log.d(TAG, document.getId() + " => " + document.getData());

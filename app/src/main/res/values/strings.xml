@@ -9,6 +9,7 @@
     <string name="add_item">Add Item</string>
     <string name="what_to_buy">What to buy?</string>
     <string name="upload">Upload</string>
+
     <string-array name="Category">
         <item>Groceries</item>
         <item>Furniture</item>
@@ -16,7 +17,6 @@
         <item>Daily Necessities</item>
         <item>Others</item>
     </string-array>
-
 
     <string name="update_budget_above">Please update your budget above</string>
     <string name="leftover_amount">Leftover amount:</string>
@@ -31,5 +31,25 @@
     <string name="it">IT</string>
     <string name="furniture">Furniture</string>
     <string name="groceries">Groceries</string>
+
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or Register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="profile">Profile</string>
+    <string name="action_Register">Register</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logout">Logout</string>
+    <string name="upload_receipt">Upload receipt</string>
+    <string name="cancel">Cancel</string>
+
+
 
 </resources>

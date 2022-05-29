@@ -75,7 +75,7 @@ public class ExpenditureViewModel extends ViewModel {
     }
 
     public void getExpenses(String user_id, final ExpensesCallback callback) {
-        db.collection("expenses").whereEqualTo("user_id", user_id).get().addOnCompleteListener(task -> {
+        db.collection("receipts").whereEqualTo("user_id", user_id).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Log.d(TAG, document.getId() + " => " + document.getData());

@@ -3,13 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_shoppingList">
 
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.spending.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+
 
     <fragment
         android:id="@+id/navigation_shoppingList"
@@ -18,29 +14,37 @@
         tools:layout="@layout/shopping_list_fragment" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.spending.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.spending.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
-
-    <fragment
 
         android:id="@+id/navigation_expenditure"
         android:name="com.example.spending.ui.expenditure.ExpenditureFragment"
         android:label="Expenditure"
         tools:layout="@layout/expenditure_fragment" />
 
-
     <fragment
         android:id="@+id/uploadReciept"
         android:name="com.example.spending.uploadReciept"
-        android:label="upload_reciept_fragment"
-        tools:layout="@layout/upload_reciept_fragment" />
+
+        android:label="Upload Reciept"
+        tools:layout="@layout/upload_reciept_fragment" >
+        <action
+            android:id="@+id/action_uploadReciept_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.spending.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.spending.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+
+
 
 </navigation>

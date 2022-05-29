@@ -11,8 +11,8 @@ import retrofit2.http.POST;
 
 public interface RetrofitAPI {
     //apikey
-    String API_KEY = "K82307679888957";
-    @POST("parse/image")
-    @Headers("apikey: " + API_KEY)
-    Call<ResponseReceiptModal> sendReceipt(@Body RequestBody body);
+
+    @POST("OCR/Model/a9e0b2b3-af98-4663-b907-8853e38ea383/LabelUrls/")
+
+    Call<NanonetsReceiptModal> sendReceipt(@Body RequestBody body);
 }
