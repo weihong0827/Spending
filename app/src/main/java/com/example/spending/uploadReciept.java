@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -15,6 +16,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -231,6 +234,13 @@ public class uploadReciept extends Fragment  {
                                                                 public void onSuccess() {
                                                                     Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
                                                                     //refresh fragment
+//                                                                    getActivity().findViewById(R.id.scrollable1).setVisibility(View.VISIBLE);
+//                                                                    getActivity().findViewById(R.id.linearLayout1).setVisibility(View.GONE);
+//                                                                    getActivity().findViewById(R.id.addItemButton).setVisibility(View.VISIBLE);
+                                                                    NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
+                                                                    navController.popBackStack();
+                                                                    navController.navigate(R.id.uploadReciept);
+
                                                                 }
 
                                                                 @Override
