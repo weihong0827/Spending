@@ -30,9 +30,17 @@
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
+
         android:id="@+id/navigation_expenditure"
         android:name="com.example.spending.ui.expenditure.ExpenditureFragment"
         android:label="Expenditure"
         tools:layout="@layout/expenditure_fragment" />
+
+
+    <fragment
+        android:id="@+id/uploadReciept"
+        android:name="com.example.spending.uploadReciept"
+        android:label="upload_reciept_fragment"
+        tools:layout="@layout/upload_reciept_fragment" />
 
 </navigation>
