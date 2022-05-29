@@ -114,18 +114,23 @@ public class ExpenditureFragment extends Fragment {
             }
         });
 
-        expViewModel.getExpenses("1", new ExpensesCallback()) {
-
-            // initialise other variables
-
+        expViewModel.getExpenses("1", new ExpensesCallback() {
             @Override
             public void act(Task<QuerySnapshot> task) {
-                // split each document into different categories
-                float groceries_prices += task.
+                for (int i = 0; i < task.getResult().size(); i++) {
+                    // split each document into different categories
+                    if (task.getResult().getDocuments().whereEqualsTo("user_id", user_id).get("category").isEquals("Groceries")) {
+                        float groceries_total_amount += task.getResult().getDocuments().get(i).get("price");
+                    }
+                    String category = task.getResult().getDocuments().get(i).
+                    if (category == "Furniture") {
+                        float furniture_prices += task.getResult().getDocuments().get(i).get("price").toString();
+                    }
+                    // repeat either one of the above for other categories once its confirm working #####################################################
             };
             // how to call function in View.java file? #######################################
             ....drawGraph(groceries_prices, ...);
-        };
+        );
 
         // why need to initialise input variables to be 0? ################################################################
         public void drawGraph(float groceries_prices, float furniture_prices = 0, float it_prices, float daily_prices, float others_prices) {
