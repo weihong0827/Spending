@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.select_category.SelectCategoryFragment">
+
+    <!-- copy paste from select_category -->
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/sand1"
+        android:orientation="vertical">
+
+        <!-- Label for input box -->
+        <TextView
+            android:id="@+id/ItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:padding="12dp"
+            android:text="@string/label_item_input"
+            android:textColor="@color/green"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Input box -->
+        <EditText
+            android:id="@+id/enterItemName"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ItemName"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Enter item name"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <!-- Space between input and choose category -->
+        <Space
+            android:id="@+id/big_space"
+            android:layout_below="@id/enterItemName"
+            android:layout_width="0dp"
+            android:layout_height="20dp"/>
+
+        <!-- Label for select category -->
+        <TextView
+            android:id="@+id/labelSelectItemCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/big_space"
+            android:layout_marginLeft="11dp"
+            android:padding="12dp"
+            android:text="@string/label_select_category"
+            android:textColor="@color/green"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Radio Buttons to select category -->
+        <RelativeLayout
+            android:id="@+id/CategorySelection"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/labelSelectItemCategory"
+            android:layout_centerHorizontal="true">
+
+            <RadioGroup
+                android:id="@+id/RadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:singleSelection="true">
+
+                <!-- Category button 1: Groceries-->
+                <RadioButton
+                    android:id="@+id/btn1Groceries"
+                    android:layout_width="370dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:drawableStart="@drawable/ic_baseline_storefront_24"
+                    android:drawablePadding="16dp"
+                    android:drawableTint="@drawable/radio_text_color"
+                    android:padding="16dp"
+                    android:text="@string/groceries"
+                    android:textAllCaps="false"
+                    android:textColor="@drawable/radio_text_color"
+                    android:textSize="18sp" />
+
+                <!-- space between buttons -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="7dp" />
+
+                <!-- Category button 2: Furniture-->
+                <RadioButton
+                    android:id="@+id/btn2Furniture"
+                    android:layout_width="370dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:drawableStart="@drawable/ic_outline_light_24"
+                    android:drawablePadding="16dp"
+                    android:drawableTint="@drawable/radio_text_color"
+                    android:padding="16dp"
+                    android:text="@string/furniture"
+                    android:textAllCaps="false"
+                    android:textColor="@drawable/radio_text_color"
+                    android:textSize="18sp" />
+
+                <!-- space between buttons -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="7dp" />
+
+                <!-- Category button 3: IT-->
+                <RadioButton
+                    android:id="@+id/btn3IT"
+                    android:layout_width="370dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:drawableStart="@drawable/ic_baseline_phonelink_24"
+                    android:drawablePadding="16dp"
+                    android:drawableTint="@drawable/radio_text_color"
+                    android:padding="16dp"
+                    android:text="@string/IT"
+                    android:textAllCaps="false"
+                    android:textColor="@drawable/radio_text_color"
+                    android:textSize="18sp" />
+
+                <!-- space between buttons -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="7dp" />
+
+                <!-- Category button 4: Daily Necessities-->
+                <RadioButton
+                    android:id="@+id/btn4Daily"
+                    android:layout_width="370dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:drawableStart="@drawable/ic_outline_house_24"
+                    android:drawablePadding="16dp"
+                    android:drawableTint="@drawable/radio_text_color"
+                    android:padding="16dp"
+                    android:text="@string/daily"
+                    android:textAllCaps="false"
+                    android:textColor="@drawable/radio_text_color"
+                    android:textSize="18sp" />
+
+                <!-- space between buttons -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="7dp" />
+
+                <!-- Category button 5: Others-->
+                <RadioButton
+                    android:id="@+id/btn5Others"
+                    android:layout_width="370dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:drawableStart="@drawable/ic_baseline_more_horiz_24"
+                    android:drawablePadding="16dp"
+                    android:drawableTint="@drawable/radio_text_color"
+                    android:padding="16dp"
+                    android:text="@string/Others"
+                    android:textAllCaps="false"
+                    android:textColor="@drawable/radio_text_color"
+                    android:textSize="18sp" />
+
+            </RadioGroup>
+
+        </RelativeLayout>
+
+        <!-- Space between input and choose category -->
+        <Space
+            android:id="@+id/big_space2"
+            android:layout_below="@id/CategorySelection"
+            android:layout_width="0dp"
+            android:layout_height="20dp"/>
+
+        <!-- Buttons: cancel, clear all, save -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/big_space2"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:padding="16dp">
+
+            <!-- cancel button -->
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/green"
+                android:text="@string/cancel_button"
+                android:textColor="@color/white" />
+
+            <Space
+                android:id="@+id/spacebtn1"
+                android:layout_width="15dp"
+                android:layout_height="0dp"
+                android:layout_toRightOf="@id/btnCancel" />
+
+            <!-- clear button -->
+            <Button
+                android:id="@+id/btnClearAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/spacebtn1"
+                android:backgroundTint="@color/green"
+                android:text="@string/clear_all_button"
+                android:textColor="@color/white" />
+
+            <Space
+                android:id="@+id/spacebtn2"
+                android:layout_width="15dp"
+                android:layout_height="0dp"
+                android:layout_toRightOf="@id/btnClearAll" />
+
+            <!-- save button -->
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/spacebtn2"
+                android:backgroundTint="@color/green"
+                android:text="@string/save_button"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>
