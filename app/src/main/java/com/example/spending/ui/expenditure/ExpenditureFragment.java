@@ -100,4 +100,5 @@ public class ExpenditureFragment extends Fragment {
         expViewModel = new ViewModelProvider(this).get(ExpenditureViewModel.class);
         // TODO: Use the ViewModel
     }
+
 }
