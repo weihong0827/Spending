@@ -62,16 +62,29 @@ public class ExpenditureViewModel extends ViewModel {
     }
 
     public void display_remaining(String user_id, final ExpenditureCallback callback) {
-        db.collection("expense").whereEqualTo("user_id", user_id).get().addOnCompleteListener(task -> {
+        db.collection("expenses").whereEqualTo("user_id", user_id).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 callback.act(task);
             }
         });
+
     }
 
     public float calculation(float budget, float expenses) {
         return budget - expenses;
     }
+
+    public float getExpenses(String user_id, final ExpensesCallback callback) {
+        db.collection("expenses").whereEqualTo("user_id", user_id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Log.d(TAG, document.getId() + " => " + document.getData());
+                }
+                callback.act(task);
+            }
+        });
+    }
+
 
     @SuppressLint("SetTextI18n")
     public void setData(float tvGroceries_value, float tvFurniture_value, float tvIT_value, float tv_DailyNecessities, float tvOthers, final ExpenditureViewModel)

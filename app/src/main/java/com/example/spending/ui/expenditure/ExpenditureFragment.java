@@ -51,6 +51,7 @@ public class ExpenditureFragment extends Fragment {
         return rootView;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         EditText editTextBudget = (EditText) view.findViewById(R.id.budget_value);
@@ -113,53 +114,70 @@ public class ExpenditureFragment extends Fragment {
             }
         });
 
-        // Link those objects with their
-        // respective id's that
-        // we have given in .XML file
-        tvGroceries = view.findViewById(R.id.tvGroceries);
-        tvFurniture = view.findViewById(R.id.tvFurniture);
-        tvIT = view.findViewById(R.id.tvIT);
-        tvDailyNecessities = view.findViewById(R.id.tvDailyNecessities);
-        tvOthers = view.findViewById(R.id.tvOthers);
-        pieChart = view.findViewById(R.id.piechart);
+        expViewModel.getExpenses("1", new ExpensesCallback()) {
 
-        // to set the text in text view and pie chart
-        // Set the percentage of language used
-        tvGroceries.setText(Integer.toString(40));
-        tvFurniture.setText(Integer.toString(30));
-        tvIT.setText(Integer.toString(5));
-        tvDailyNecessities.setText(Integer.toString(15));
-        tvOthers.setText(Integer.toString(10));
+            // initialise other variables
 
-        // Set the data and color to the pie chart
-        pieChart.addPieSlice(
-                new PieModel(
-                        "Groceries",
-                        Integer.parseInt(tvGroceries.getText().toString()),
-                        Color.parseColor("#FFA726")));
-        pieChart.addPieSlice(
-                new PieModel(
-                        "Furniture",
-                        Integer.parseInt(tvFurniture.getText().toString()),
-                        Color.parseColor("#66BB6A")));
-        pieChart.addPieSlice(
-                new PieModel(
-                        "IT",
-                        Integer.parseInt(tvIT.getText().toString()),
-                        Color.parseColor("#EF5350")));
-        pieChart.addPieSlice(
-                new PieModel(
-                        "DailyNecessities",
-                        Integer.parseInt(tvDailyNecessities.getText().toString()),
-                        Color.parseColor("#29B6F6")));
-        pieChart.addPieSlice(
-                new PieModel(
-                        "Others",
-                        Integer.parseInt(tvOthers.getText().toString()),
-                        Color.parseColor("#f629a4")));
+            @Override
+            public void act(Task<QuerySnapshot> task) {
+                // split each document into different categories
+                float groceries_prices += task.
+            };
+            // how to call function in View.java file? #######################################
+            ....drawGraph(groceries_prices, ...);
+        };
 
-        // To animate the pie chart
-        pieChart.startAnimation();
+        // why need to initialise input variables to be 0? ################################################################
+        public void drawGraph(float groceries_prices, float furniture_prices = 0, float it_prices, float daily_prices, float others_prices) {
+
+            // Link those objects with their
+            // respective id's that
+            // we have given in .XML file
+            tvGroceries = view.findViewById(R.id.tvGroceries);
+            tvFurniture = view.findViewById(R.id.tvFurniture);
+            tvIT = view.findViewById(R.id.tvIT);
+            tvDailyNecessities = view.findViewById(R.id.tvDailyNecessities);
+            tvOthers = view.findViewById(R.id.tvOthers);
+            pieChart = view.findViewById(R.id.piechart);
+
+            // to set the text in text view and pie chart
+            // Set the percentage of language used
+            tvGroceries.setText(Float.toString(groceries_prices));
+            tvFurniture.setText(Float.toString(furniture_prices));
+            tvIT.setText(Float.toString(it_prices));
+            tvDailyNecessities.setText(Float.toString(daily_prices));
+            tvOthers.setText(Float.toString(others_prices));
+
+            // Set the data and color to the pie chart
+            pieChart.addPieSlice(
+                    new PieModel(
+                            "Groceries",
+                            groceries_prices,
+                            Color.parseColor("#FFA726")));
+            pieChart.addPieSlice(
+                    new PieModel(
+                            "Furniture",
+                            furniture_prices,
+                            Color.parseColor("#66BB6A")));
+            pieChart.addPieSlice(
+                    new PieModel(
+                            "IT",
+                            it_prices,
+                            Color.parseColor("#EF5350")));
+            pieChart.addPieSlice(
+                    new PieModel(
+                            "DailyNecessities",
+                            daily_prices,
+                            Color.parseColor("#29B6F6")));
+            pieChart.addPieSlice(
+                    new PieModel(
+                            "Others",
+                            others_prices,
+                            Color.parseColor("#f629a4")));
+
+            // To animate the pie chart
+            pieChart.startAnimation();
+        }
     }
 
     @Override
