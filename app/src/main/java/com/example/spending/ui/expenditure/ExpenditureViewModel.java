@@ -29,28 +29,30 @@ public class ExpenditureViewModel extends ViewModel {
         HashMap<String, Object> budgetMap = new HashMap<>();
         budgetMap.put("budget_value", budget_value);
         budgetMap.put("user_id", user_id);
-        Log.d(TAG, String.valueOf(budgetMap));
-        // ##################################################################################### why can't firebase update? Is it cause my firebase not working?
-        // ##################################################################################### even Wei Hong's { db.collection("shopping list").add(itemMap) } not working also
-        db.collection("budget").document("testUpdate").update(budgetMap);
-        Log.d(TAG, "addBudget: tested doc().update");
-        db.collection("budget").document("testSet").set(budgetMap);
-        Log.d(TAG, "addBudget: tested doc().set");
+
+
+
         db.collection("budget").add(budgetMap);
         Log.d(TAG, "addBudget: tested col().add");
         // ##################################################################################### what determines successful?
-        if (!db.collection("budget").whereEqualTo("user_id", user_id).get().isSuccessful()) {
-            db.collection("budget").add(budgetMap);
-            Log.d(TAG, "Added " + budget_value + " to firebase for user_id: " + user_id + " with Idk what document ID");
-        } else {
-            // test going into the else loop ###################################################################################################
-            // how to updateDoc? ###################################################################################################
-            db.collection("budget").document("budget_fixeddocumentid").set(budgetMap);
-            db.collection("budget").whereEqualTo("user_id", user_id);
-            Log.d(TAG, "addBudget: updated document to " + budget_value + " for user_id: " + user_id);
-        }
+//        if (!db.collection("budget").whereEqualTo("user_id", user_id).get().isSuccessful()) {
+//            db.collection("budget").add(budgetMap);
+//            Log.d(TAG, "Added " + budget_value + " to firebase for user_id: " + user_id + " with Idk what document ID");
+//        } else {
+//            // test going into the else loop ###################################################################################################
+//            // how to updateDoc? ###################################################################################################
+//            db.collection("budget").document("budget_fixeddocumentid").set(budgetMap);
+//            db.collection("budget").whereEqualTo("user_id", user_id);
+//            Log.d(TAG, "addBudget: updated document to " + budget_value + " for user_id: " + user_id);
+//        }
     }
+    public void updateBudget(String documentId, float budget_value) {
+        HashMap<String, Object> budgetMap = new HashMap<>();
 
+        Log.d(TAG, String.valueOf(budgetMap));
+        db.collection("budget").document(documentId).update("budget_value", budget_value);
+
+    }
     public void getBudget(String user_id, final ExpenditureCallback callback) {
         //firebase firestore get record
 

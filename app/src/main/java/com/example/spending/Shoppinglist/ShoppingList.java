@@ -106,7 +106,7 @@ public class ShoppingList extends Fragment {
                         Toast.makeText(getContext(), "Please enter an item", Toast.LENGTH_SHORT).show();
                     } else {
 
-                        mViewModel.insertItem(item, category, "1", new ShoppingListCheckboxUpdateCallback() {
+                        mViewModel.insertItem(item, category, user.getUid(), new ShoppingListCheckboxUpdateCallback() {
                             @Override
                             public void act(Task<DocumentReference> task) {
                                 CheckBox checkBox = new CheckBox(getContext());

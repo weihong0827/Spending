@@ -24,7 +24,7 @@
         android:id="@+id/uploadReciept"
         android:name="com.example.spending.uploadReciept"
 
-        android:label="Upload Reciept"
+        android:label="Upload Receipt"
         tools:layout="@layout/upload_reciept_fragment" >
         <action
             android:id="@+id/action_uploadReciept_to_loginFragment"

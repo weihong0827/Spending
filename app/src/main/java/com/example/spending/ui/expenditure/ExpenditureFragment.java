@@ -45,6 +45,8 @@ public class ExpenditureFragment extends Fragment {
     private ExpenditureViewModel expViewModel;
     private ShoppingListViewModel mViewModel;
     private static final String TAG = "Expenditure";
+    float budget = 0;
+    float total_spent = 0;
     FirebaseUser user;
 
     TextView tvGroceries, tvFurniture, tvIT, tvDailyNecessities, tvOthers;
@@ -78,11 +80,12 @@ public class ExpenditureFragment extends Fragment {
                         @Override
                         public void act(Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-                                float budget = 0;
+
                                 if (task.getResult().getDocuments().size() > 0) {
                                     if (!String.valueOf(task.getResult().getDocuments().get(0).get("budget_value")).isEmpty()) {
                                         budget = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("budget_value")));
                                         editTextBudget.setText(String.valueOf(budget));
+                                        editTextBudget.setTag(task.getResult().getDocuments().get(0).getId());
                                     }
 
                                 }
@@ -100,7 +103,7 @@ public class ExpenditureFragment extends Fragment {
                                             if (querySnapshot.isEmpty()) {
                                                 Log.d(TAG, "onViewCreated: No Receipts");
                                             } else {
-                                                float total_spent = 0;
+
                                                 for (DocumentSnapshot document : task.getResult().getDocuments()) {
                                                     ReceiptDetail receipt = document.toObject(ReceiptDetail.class);
                                                     long epoch = receipt.getTimestamp();
@@ -163,16 +166,24 @@ public class ExpenditureFragment extends Fragment {
             public void onClick(View v) {
                 if (user!=null) {
                     float budget_value = Float.parseFloat(editTextBudget.getText().toString());
-                    expViewModel.addBudget(user.getUid(), budget_value);
-                    editTextBudget.setText(String.valueOf(budget_value));
-                    expViewModel.display_remaining(user.getUid(), new ExpenditureCallback() {
-                                @Override
-                                public void act(Task<QuerySnapshot> task) {
-                                    float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
-                                    remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
+                    String tag = editTextBudget.getTag().toString();
+                    if (!tag.isEmpty()) {
+                        expViewModel.updateBudget(tag, budget_value);
+                        remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, total_spent)));
+
+                    }else{
+                        expViewModel.addBudget(user.getUid(), budget_value);
+                        editTextBudget.setText(String.valueOf(budget_value));
+                        expViewModel.display_remaining(user.getUid(), new ExpenditureCallback() {
+                                    @Override
+                                    public void act(Task<QuerySnapshot> task) {
+                                        float expense = Float.parseFloat(String.valueOf(task.getResult().getDocuments().get(0).get("expense")));
+                                        remaining_value.setText(String.valueOf(expViewModel.calculation(budget_value, expense)));
+                                    }
                                 }
-                            }
-                    );
+                        );
+                    }
+
                 }else{
                     Toast.makeText(getActivity(), "Please login to update your budget", Toast.LENGTH_SHORT).show();
                 }
